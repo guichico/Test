@@ -28,7 +28,7 @@ class Loginscreen extends Component {
             loginmessage: loginmessage
         })
     }
-    handleClick(event) {
+    handleClick() {
         var loginmessage;
         if (this.state.isLogin) {
             let loginscreen = [];
@@ -37,7 +37,7 @@ class Loginscreen extends Component {
                 <div key="login-button">
                     <MuiThemeProvider>
                         <div>
-                            <RaisedButton label={"Login"} primary={true} style={style} onClick={(event) => this.handleClick(event)} />
+                            <RaisedButton label={"Login"} primary={true} style={style} onClick={() => this.handleClick()} />
                         </div>
                     </MuiThemeProvider>
                 </div>

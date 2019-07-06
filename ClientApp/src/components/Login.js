@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-var apiBaseUrl = "http://localhost:4000/api/";
+var apiBaseUrl = "http://localhost:5000/api/";
 import axios from 'axios';
 
 const style = {
@@ -39,29 +39,38 @@ class Login extends Component {
 
     handleClick() {
         if (this.handleValidation()) {
-            var payload = {
-                "username": this.state.username,
-                "password": this.state.password,
-            }
-
-            axios.post(apiBaseUrl + 'login', payload)
-                .then(function (response) {
-                    console.log(response);
-                    if (response.data.code === 200) {
-                        console.log("Login successfull");
-                    }
-                    else if (response.data.code === 204) {
-                        console.log("Username password do not match");
-                        alert(response.data.success)
-                    }
-                    else {
-                        console.log("Username does not exists");
-                        alert("Username does not exist");
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            console.log("requisicao");
+            axios({
+                baseURL: apiBaseUrl,
+                url: 'AuthController/login',
+                method: 'post',
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+                    "Content-Type": "application/json"
+                },
+                data: {
+                    "username": this.state.username,
+                    "password": this.state.password
+                }
+            }).then(function (response) {
+                console.log("voltou");
+                console.log(response);
+                if (response.data.code === 200) {
+                    console.log("Login successfull");
+                }
+                else if (response.data.code === 204) {
+                    console.log("Username password do not match");
+                    alert(response.data.success)
+                }
+                else {
+                    console.log("Username does not exists");
+                    alert("Username does not exist");
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     }
     render() {
@@ -72,19 +81,27 @@ class Login extends Component {
                         <TextField
                             hintText="Digite seu nome de usuario"
                             floatingLabelText="Usuario"
-                            onChange={(newValue) => this.setState({ username: newValue })}
-                        />
+                            onChange={(event, newValue) => {
+                                event.persist();
+                                this.setState({
+                                    username: newValue
+                                });
+                            }} />
                         <span style={{ color: "red" }}>{this.state.errors["username"]}</span>
                         <br />
                         <TextField
                             type="password"
                             hintText="Digite sua senha"
                             floatingLabelText="Senha"
-                            onChange={(newValue) => this.setState({ password: newValue })}
-                        />
+                            onChange={(event, newValue) => {
+                                event.persist();
+                                this.setState({
+                                    password: newValue
+                                });
+                            }} />
                         <span style={{ color: "red" }}>{this.state.errors["password"]}</span>
                         <br />
-                        <RaisedButton label="Entrar" primary={true} style={style} onClick={() => this.handleClick(event)} />
+                        <RaisedButton label="Entrar" primary={true} style={style} onClick={() => this.handleClick()} />
                     </div>
                 </MuiThemeProvider>
             </div>
