@@ -4,7 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 var apiBaseUrl = "http://localhost:5000/api/";
 import axios from 'axios';
-import { request } from 'http';
 
 const style = {
     margin: 15,
