@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Text;
 using CryptoHelper;
 using Microsoft.IdentityModel.Tokens;
-using Test.Identity.Services;
 using Test.ViewModels;
 
 namespace Test.Services
@@ -13,6 +12,7 @@ namespace Test.Services
     {
         string jwtSecret;
         int jwtLifespan;
+
         public AuthService(string jwtSecret, int jwtLifespan)
         {
             this.jwtSecret = jwtSecret;

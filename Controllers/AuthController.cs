@@ -1,6 +1,6 @@
 using CryptoHelper;
 using Microsoft.AspNetCore.Mvc;
-using Test.Identity.Services;
+using Test.Services;
 using Test.ViewModels;
 
 namespace Test.Controllers

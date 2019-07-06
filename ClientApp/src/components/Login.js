@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 var apiBaseUrl = "http://localhost:5000/api/";
 import axios from 'axios';
+import { request } from 'http';
 
 const style = {
     margin: 15,
@@ -39,10 +40,14 @@ class Login extends Component {
 
     handleClick() {
         if (this.handleValidation()) {
-            console.log("requisicao");
+            axios.interceptors.request.use(request => {
+                console.log(request);
+                return request
+            })
+
             axios({
                 baseURL: apiBaseUrl,
-                url: 'AuthController/login',
+                url: 'Auth/login',
                 method: 'post',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -55,7 +60,6 @@ class Login extends Component {
                     "password": this.state.password
                 }
             }).then(function (response) {
-                console.log("voltou");
                 console.log(response);
                 if (response.data.code === 200) {
                     console.log("Login successfull");

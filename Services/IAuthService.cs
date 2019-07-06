@@ -1,6 +1,6 @@
 ﻿using Test.ViewModels;
 
-namespace Test.Identity.Services
+namespace Test.Services
 {
     public interface IAuthService
     {
