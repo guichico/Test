@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Test.Repositories;
 using Test.Services;
 
 namespace Test
@@ -24,6 +25,7 @@ namespace Test
 
             services.AddCors();
 
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddSingleton<IAuthService>(
                 new AuthService(
                     Configuration.GetValue<string>("JWTSecretKey"),

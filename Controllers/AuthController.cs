@@ -1,5 +1,5 @@
-using CryptoHelper;
 using Microsoft.AspNetCore.Mvc;
+using Test.Repositories;
 using Test.Services;
 using Test.ViewModels;
 
@@ -9,10 +9,12 @@ namespace Test.Controllers
     public class AuthController : Controller
     {
         IAuthService authService;
+        IUserRepository userRepository;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IUserRepository userRepository)
         {
             this.authService = authService;
+            this.userRepository = userRepository;
         }
 
         [HttpPost("login")]
@@ -20,7 +22,14 @@ namespace Test.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var passwordValid = authService.VerifyPassword(model.Password, Crypto.HashPassword("1234"));
+            var user = userRepository.GetUser(model.Username);
+
+            if (user == null)
+            {
+                return BadRequest(new { message = "Login e/ou senha inválido(s)" });
+            }
+
+            var passwordValid = authService.VerifyPassword(model.Password, user.Password);
             if (!passwordValid)
             {
                 return BadRequest(new { message = "Login e/ou senha inválido(s)" });
