@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Test.Areas.Identity.Data;
+using Test.Areas.Identity;
 
 namespace Test.Models
 {

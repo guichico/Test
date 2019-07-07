@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Test.Areas.Identity.Data;
+using Test.Areas.Identity;
 using Test.Models;
 
 namespace Test.Repositories

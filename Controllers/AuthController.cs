@@ -29,13 +29,13 @@ namespace Test.Controllers
                 return BadRequest(new { message = "Login e/ou senha inválido(s)" });
             }
 
-            var passwordValid = authService.VerifyPassword(model.Password, user.Password);
+            var passwordValid = authService.VerifyPassword(model.Password, user.PasswordHash);
             if (!passwordValid)
             {
                 return BadRequest(new { message = "Login e/ou senha inválido(s)" });
             }
 
-            return authService.GetAuthData("1234");
+            return authService.GetAuthData(user.Id);
         }
     }
 }

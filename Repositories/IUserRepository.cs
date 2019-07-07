@@ -1,4 +1,4 @@
-﻿using Test.Areas.Identity.Data;
+﻿using Test.Areas.Identity;
 
 namespace Test.Repositories
 {
