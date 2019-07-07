@@ -23,7 +23,7 @@ namespace Test.Controllers
             var passwordValid = authService.VerifyPassword(model.Password, Crypto.HashPassword("1234"));
             if (!passwordValid)
             {
-                return BadRequest(new { password = "invalid password" });
+                return BadRequest(new { message = "Login e/ou senha inválido(s)" });
             }
 
             return authService.GetAuthData("1234");

@@ -39,11 +39,6 @@ class Login extends Component {
 
     handleClick() {
         if (this.handleValidation()) {
-            axios.interceptors.request.use(request => {
-                console.log(request);
-                return request
-            })
-
             axios({
                 baseURL: apiBaseUrl,
                 url: 'Auth/login',
@@ -59,20 +54,17 @@ class Login extends Component {
                     "password": this.state.password
                 }
             }).then(function (response) {
-                console.log(response);
-                if (response.data.code === 200) {
-                    console.log("Login successfull");
-                }
-                else if (response.data.code === 204) {
-                    console.log("Username password do not match");
-                    alert(response.data.success)
-                }
-                else {
-                    console.log("Username does not exists");
-                    alert("Username does not exist");
+                if (response.status === 200) {
+                    alert("Login realizado com sucesso\nUserid:"
+                        + response.data.id + "\nToken:" + response.data.token);
                 }
             }).catch(function (error) {
-                console.log(error);
+                if (error.response.status === 400) {
+                    alert(error.response.data.message)
+                }
+                else {
+                    alert("Erro ao realizar o login. Tente novamente mais tarde");
+                }
             });
         }
     }
