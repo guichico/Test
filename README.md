@@ -1,6 +1,8 @@
-# Test
+# TestLogin
 
-Projeto de Teste para a vaga de arquiteto de sistemas.
+Projeto de Login utilizando React, .NET Core, XUnit e SQL Server.
+
+Teste para a vaga de arquiteto de sistemas.
 
 **Próximos passos:**
 
